@@ -1,0 +1,14 @@
+{
+    "applications": {
+        "SaveLife": {
+            "applicationId": "If7hGZrB0ydcCfhO5nfA7pqB945aUrojZlsnK2i2", 
+            "masterKey": "0aHrUkyDP3lFe6uqQKeUaUfUxMVxCmtIDdRHUxlN"
+        }, 
+        "_default": {
+            "link": "SaveLife"
+        }
+    }, 
+    "global": {
+        "parseVersion": "1.3.1"
+    }
+}
