@@ -14,7 +14,8 @@
     <string name="com_parse_ui_confirm_password_input_hint">Re-enter password</string>
     <string name="com_parse_ui_name_input_hint">FirstName LastName</string>
     <string name="com_parse_ui_address_input_hint">City/Town/District, State, Country</string>
-    <string name="com_parse_ui_phone_input_hint">+Country Code-xxx-xxx-xxxx</string>
+    <string name="com_parse_ui_phone_input_hint">Your Phone No: +Code xxx xxx xxxx</string>
+    <string name="com_parse_ui_emergency_contact_input_hint">Emergency Contact: +Code xxx xxx xxxx</string>
     <string name="com_parse_ui_create_account_button_label">Create account</string>
     <string name="com_parse_ui_no_username_toast">Please enter your username</string>
     <string name="com_parse_ui_no_password_toast">Please enter your password</string>
@@ -38,7 +39,11 @@
     <string name="com_parse_ui_email_taken_toast">Email is already taken, please reset your password instead</string>
     <string name="com_parse_ui_no_name_toast">Please enter your name</string>
     <string name="com_parse_ui_no_address_toast">Please enter your address</string>
-    <string name="com_parse_ui_no_phone_toast">Please enter your phone</string>
+    <string name="com_parse_ui_no_phone_toast">Please enter your phone number</string>
+    <string name="com_parse_ui_invalid_phone_toast">Please enter valid phone number with country code</string>
+    <string name="com_parse_ui_no_emergency_contact_toast">Please enter your emergency contact phone number</string>
+    <string name="com_parse_ui_invalid_emergency_contact_toast">Please enter valid emergency contact 
+                                                    phone number with country code</string>
     <string name="com_parse_ui_signup_failed_unknown_toast">Could not sign up, please try again later</string>
     <string name="com_parse_ui_login_help_instructions">Enter your email to recover your password</string>
     <string name="com_parse_ui_login_help_email_input_hint">Email</string>

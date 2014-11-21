@@ -68,7 +68,16 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/com_parse_ui_small_vertical_spacing"
         android:ems="10"
-        android:hint="@string/com_parse_ui_phone_input_hint" />
+        android:hint="@string/com_parse_ui_phone_input_hint"/>
+
+    <EditText
+        android:id="@+id/signup_emergency_contact_input"
+        style="@style/ParseLoginUI.EditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/com_parse_ui_small_vertical_spacing"
+        android:ems="10"
+        android:hint="@string/com_parse_ui_emergency_contact_input_hint"/>
 
     <RadioGroup
         android:id="@+id/radioGroup1"
@@ -92,22 +101,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.32"
             android:text="User"/>
-        
-        <!--  
-        <CheckBox
-            android:id="@+id/checkBox1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.14"
-            android:text="Volunteer and User" />
-
-        <CheckBox
-            android:id="@+id/checkBox2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.32"
-            android:text="User" />
-        -->
+   
     </RadioGroup>
 
     <Button
