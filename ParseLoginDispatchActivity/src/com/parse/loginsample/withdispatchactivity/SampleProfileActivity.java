@@ -34,6 +34,7 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -69,6 +70,7 @@ public class SampleProfileActivity extends Activity implements
   private TextView emailTextView;
   private TextView nameTextView;
   private LocationClient locationclient;
+  private String emergencyLocation;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -93,7 +95,8 @@ public class SampleProfileActivity extends Activity implements
             Location loc = null;
             if (locationclient != null && locationclient.isConnected()) {
                     loc = locationclient.getLastLocation();
-                    System.out.println("Emergency Location :" + loc.getLatitude() + "," + loc.getLongitude());
+                    emergencyLocation = String.format("Emergency GPS Location :" + loc.getLatitude() + "," + loc.getLongitude());
+                    System.out.println(emergencyLocation);
             }
             
             HashMap<String, Object> params = new HashMap<String, Object>();
@@ -123,6 +126,22 @@ public class SampleProfileActivity extends Activity implements
             //System.out.println(user.getString("phone"));
             params.put("userid", user.getObjectId());
             params.put("phone", user.getString("phone"));
+           
+            String message = addressText + " " + emergencyLocation;
+            String emergencyContactPhoneNumber = user.getString("emergencyContact");
+            
+            try {
+                SmsManager smsManager = SmsManager.getDefault();
+                smsManager.sendTextMessage(emergencyContactPhoneNumber, null, message, null, null);
+                Toast.makeText(getApplicationContext(), "SMS sent to Emergency Contact",
+                Toast.LENGTH_LONG).show();
+             } catch (Exception e) {
+                Toast.makeText(getApplicationContext(),
+                "Emergency SMS faild, please try again.",
+                Toast.LENGTH_LONG).show();
+                e.printStackTrace();
+             }
+            
             ParseCloud.callFunctionInBackground("needhelp", params, new FunctionCallback<String>() {
                public void done(String result, ParseException e) {
                    if (e == null) {

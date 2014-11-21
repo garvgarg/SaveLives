@@ -25,6 +25,8 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient;
@@ -72,6 +74,7 @@ public class ParseSignupFragment extends ParseLoginFragmentBase implements
   private EditText nameField;
   private EditText addressField;
   private EditText phoneField;
+  private EditText emergencyContactField;
   private Button createAccountButton;
   private ParseOnLoginSuccessListener onLoginSuccessListener;
   private LocationClient locationclient;
@@ -80,7 +83,6 @@ public class ParseSignupFragment extends ParseLoginFragmentBase implements
   //private CheckBox user;
   private RadioButton volunteerUser;
   private RadioButton user;
-  
   
   private ParseLoginConfig config;
   private int minPasswordLength;
@@ -94,6 +96,7 @@ public class ParseSignupFragment extends ParseLoginFragmentBase implements
   private static final String USER_OBJECT_VOLUNTEER_USER_FIELD = "volunteerNuser";
   private static final String USER_OBJECT_PHONE_FIELD = "phone";
   private static final String USER_OBJECT_GEOPOINT_FIELD = "location";
+  private static final String USER_OBJECT_EMERGENCY_CONTACT_FIELD = "emergencyContact";
   
   public static ParseSignupFragment newInstance(Bundle configOptions, String username, String password) {
     ParseSignupFragment signupFragment = new ParseSignupFragment();
@@ -130,10 +133,9 @@ public class ParseSignupFragment extends ParseLoginFragmentBase implements
     nameField = (EditText) v.findViewById(R.id.signup_name_input);
     addressField = (EditText) v.findViewById(R.id.signup_address_input);
     phoneField = (EditText) v.findViewById(R.id.signup_phone_input);
+    emergencyContactField = (EditText) v.findViewById(R.id.signup_emergency_contact_input);
     createAccountButton = (Button) v.findViewById(R.id.create_account);
     volunteerUserGroup = (RadioGroup) v.findViewById(R.id.radioGroup1);
-    //volunteerUser = (CheckBox) v.findViewById(R.id.checkBox1);
-    //user = (CheckBox) v.findViewById(R.id.checkBox2);
     volunteerUser = (RadioButton) v.findViewById(R.id.volunteerNuser);
     user = (RadioButton) v.findViewById(R.id.user);
     
@@ -220,6 +222,21 @@ public class ParseSignupFragment extends ParseLoginFragmentBase implements
         phone = phoneField.getText().toString();
       }
     
+    //Pattern pattern1 = Pattern.compile("[0-9+-]");
+    //Pattern pattern1 = Pattern.compile("\\+\\d \\d{3} \\d{4} \\d{4}");
+    Pattern pattern1 = Pattern.compile("\\d{11}");
+    Matcher matcher1 = pattern1.matcher(phone);
+    
+    String emergencyCnt = null;
+    if (emergencyContactField != null) {
+        emergencyCnt = emergencyContactField.getText().toString();
+    }
+    
+    //Pattern pattern2 = Pattern.compile("[0-9]");
+    //Pattern pattern2 = Pattern.compile("\\+?\\d?\\d?\\d?\\d?\\d-\\d{3}-\\d{4}-\\d{4}");
+    Pattern pattern2 = Pattern.compile("\\d{11}");
+    Matcher matcher2 = pattern2.matcher(emergencyCnt);
+    
     int selectId = volunteerUserGroup.getCheckedRadioButtonId();
     System.out.println("Button id:" + selectId);
     System.out.println("volunteer n user id" + volunteerUser.getId());    
@@ -248,8 +265,14 @@ public class ParseSignupFragment extends ParseLoginFragmentBase implements
       showToast(R.string.com_parse_ui_no_address_toast);
     } else if (phone.length() == 0) {  
         showToast(R.string.com_parse_ui_no_phone_toast);
-    } else if (phone != null && phone.length() == 0) {
-        showToast(R.string.com_parse_ui_no_phone_toast);
+    } else if (phone != null && ((phone.length() < 11 || 
+               phone.length() > 18) || !matcher1.matches())) {
+        showToast(R.string.com_parse_ui_invalid_phone_toast);
+    } else if (emergencyCnt.length() == 0) {  
+        showToast(R.string.com_parse_ui_no_emergency_contact_toast);
+    } else if (emergencyCnt != null && (emergencyCnt.length() < 11 ||
+               emergencyCnt.length() > 18 || !matcher2.matches())) {
+        showToast(R.string.com_parse_ui_invalid_emergency_contact_toast);
     } else {
       ParseUser user = new ParseUser();
 
@@ -289,6 +312,10 @@ public class ParseSignupFragment extends ParseLoginFragmentBase implements
       
       if (phone.length() != 0) {
           user.put(USER_OBJECT_PHONE_FIELD, phone);
+      }
+      
+      if (emergencyCnt.length() != 0) {
+          user.put(USER_OBJECT_EMERGENCY_CONTACT_FIELD, emergencyCnt);
       }
       
       loadingStart();

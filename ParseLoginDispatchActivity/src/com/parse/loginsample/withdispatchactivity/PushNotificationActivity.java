@@ -28,7 +28,7 @@ public class PushNotificationActivity extends Activity {
             TextView street = (TextView) findViewById(R.id.streetAddress);
             TextView city = (TextView) findViewById(R.id.city);
             TextView state = (TextView) findViewById(R.id.state);
-            TextView country = (TextView) findViewById(R.id.country);
+            //TextView country = (TextView) findViewById(R.id.country);
             TextView phone = (TextView) findViewById(R.id.phone);
             
             
@@ -41,13 +41,14 @@ public class PushNotificationActivity extends Activity {
             }
             
             if ((state != null) && (i.getStringExtra("zip") != null)) {
-                state.setText( "State : " + i.getStringExtra("state") + " - " +i.getStringExtra("zip"));
+                state.setText( "State : " + i.getStringExtra("state") + " - " + i.getStringExtra("zip")
+                        + "     Country: " + i.getStringExtra("country"));
             }
-            
+            /*
             if (country != null) {
                 country.setText( "Country : " + i.getStringExtra("country"));
             }
-            
+            */
             
             if (phone != null) {
 
@@ -79,13 +80,26 @@ public class PushNotificationActivity extends Activity {
             
             findViewById(R.id.ShowMap).setOnClickListener(new OnClickListener() {
                 public void onClick(View v) {
+                    
                     String uri = String.format(("http://maps.google.com/maps?daddr=%s,%s"), lat, lng);
                     Intent intent = new Intent(android.content.Intent.ACTION_VIEW, 
                             //Uri.parse("http://maps.google.com/maps?saddr=20.344,34.34&daddr=20.5666,45.345"));
                             Uri.parse(uri));
-                        startActivity(intent);           
+                        startActivity(intent);
+                         }
+            });
+            
+            findViewById(R.id.ShowHospitals).setOnClickListener(new OnClickListener() {
+                public void onClick(View v) {
+                    
+                    String geoURI = String.format("geo:%f,%f?q=hospital", Double.valueOf(lat), Double.valueOf(lng));
+                    Uri geo = Uri.parse(geoURI);
+                    Intent geoMap = new Intent(Intent.ACTION_VIEW, geo);
+                    startActivity(geoMap);
+
                 }
             });
+
         }
     }
 }

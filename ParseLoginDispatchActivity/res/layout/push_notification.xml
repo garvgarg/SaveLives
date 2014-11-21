@@ -8,9 +8,10 @@
 
     <ImageView
         android:id="@+id/app_logo"
-        android:layout_width="204dp"
-        android:layout_height="239dp"
+        android:layout_width="124dp"
+        android:layout_height="108dp"
         android:layout_gravity="center"
+        android:layout_weight="0.35"
         android:contentDescription="@string/com_parse_ui_logo_content_description"
         android:src="@drawable/com_parse_ui_app_logo" />
 
@@ -53,12 +54,6 @@
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
-        android:id="@+id/country"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <TextView
         android:id="@+id/messageContent"
         style="@style/ParseLoginUI.TextView"
         android:layout_width="fill_parent"
@@ -70,7 +65,7 @@
     <TextView
         android:id="@+id/signature"
         style="@style/ParseLoginUI.TextView"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clickable="true"
         android:linksClickable="true" />
@@ -78,9 +73,9 @@
     <LinearLayout
         android:id="@+id/phone_call"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/com_parse_ui_large_vertical_spacing">
-    
+        android:layout_height="36dp"
+        android:layout_marginTop="@dimen/com_parse_ui_large_vertical_spacing" >
+
         <TextView
             android:id="@+id/phone"
             android:layout_width="229dp"
@@ -99,13 +94,12 @@
             android:textColor="@color/com_parse_ui_parse_login_display_text"
             android:textSize="24sp"
             android:typeface="normal" />
-
     </LinearLayout>
-    
+
     <Button
         android:id="@+id/ShowMap"
         android:layout_width="wrap_content"
-        android:layout_height="48dp"
+        android:layout_height="36dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/com_parse_ui_parse_login_button_background_selector"
         android:linksClickable="true"
@@ -114,5 +108,18 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="@color/com_parse_ui_parse_login_display_text"
         android:textSize="24sp" />
-    
+
+    <Button
+        android:id="@+id/ShowHospitals"
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/com_parse_ui_parse_login_button_background_selector"
+        android:linksClickable="true"
+        android:paddingTop="@dimen/com_parse_ui_small_vertical_spacing"
+        android:text="    Show nearby hospitals    "
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/com_parse_ui_parse_login_display_text"
+        android:textSize="24sp" />
+
 </LinearLayout>
