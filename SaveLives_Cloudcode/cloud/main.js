@@ -24,7 +24,7 @@ Parse.Cloud.define("needhelp", function(request, response) {
   console.error(request.params);
   //query.find
   var point = new Parse.GeoPoint(request.params.lat, request.params.lng);
-  query.withinMiles("location" , point, 10);
+  query.withinMiles("location" , point, 1);
   
   // Find devices associated with these users
   var pushQuery = new Parse.Query(Parse.Installation);

@@ -30,26 +30,28 @@ public class PushNotificationActivity extends Activity {
             TextView state = (TextView) findViewById(R.id.state);
             //TextView country = (TextView) findViewById(R.id.country);
             TextView phone = (TextView) findViewById(R.id.phone);
+            String c = i.getStringExtra("location");
+            if (c != null) {
+            	if (street != null) {
+                    street.setText( "Need help near : " + i.getStringExtra("location"));
+                  }                  	
+            } else {
             
+            	if (street != null) {
+            		street.setText( "Street Address : " + i.getStringExtra("street"));
+            		//street.setText( "Near by Address : " + c);
+            	}
             
-            if (street != null) {
-              street.setText( "Street Address : " + i.getStringExtra("street"));
+            	if (city != null) {
+            		city.setText( "City : " + i.getStringExtra("city"));
+            	}
+            
+            	if ((state != null) && (i.getStringExtra("zip") != null)) {
+            		state.setText( "State : " + i.getStringExtra("state") + " - " + i.getStringExtra("zip")
+            				+ "     Country: " + i.getStringExtra("country"));
+            	}
+            	 
             }
-            
-            if (city != null) {
-                city.setText( "City : " + i.getStringExtra("city"));
-            }
-            
-            if ((state != null) && (i.getStringExtra("zip") != null)) {
-                state.setText( "State : " + i.getStringExtra("state") + " - " + i.getStringExtra("zip")
-                        + "     Country: " + i.getStringExtra("country"));
-            }
-            /*
-            if (country != null) {
-                country.setText( "Country : " + i.getStringExtra("country"));
-            }
-            */
-            
             if (phone != null) {
 
                 phone.setText("Phone No.: " + i.getStringExtra("phone"));
@@ -64,11 +66,6 @@ public class PushNotificationActivity extends Activity {
             lat = i.getStringExtra("Latitude");
             lng = i.getStringExtra("Longitude");
             ph = i.getStringExtra("phone");
-            /*
-            if (signature != null) {
-                signature.setText(i.getStringExtra("address"));
-                //signature.setText(i.getStringExtra("Longitude"));
-            }*/
             
             findViewById(R.id.call).setOnClickListener(new OnClickListener() {
                 String uri =  String.format(("tel:" + "%s"), ph);

@@ -31,17 +31,14 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.Signature;
 import android.util.Base64;
 import android.util.Log;
-import android.widget.Toast;
 
+import com.flurry.android.FlurryAgent;
 import com.parse.Parse;
-import com.parse.ParseAnalytics;
+import com.parse.ParseCrashReporting;
 import com.parse.ParseException;
 import com.parse.ParseFacebookUtils;
-import com.parse.ParseInstallation;
 import com.parse.ParsePush;
 import com.parse.ParseTwitterUtils;
-import com.parse.ParseUser;
-import com.parse.PushService;
 import com.parse.SaveCallback;
 
 public class SampleApplication extends Application {
@@ -49,14 +46,20 @@ public class SampleApplication extends Application {
 @Override
   public void onCreate() {
     super.onCreate();
-    // Required - Initialize the Parse SDK
+    // Enable Crash Reporting
+    ParseCrashReporting.enable(this);
+ /*   // Enabling log reporting
+    FlurryAgent.setLogEnabled(true);
+    FlurryAgent.setLogEvents(true);
+    FlurryAgent.setLogLevel(Log.VERBOSE);
+    // init Flurry			
+    FlurryAgent.init(this, getString(R.string.flurry_apikey)); */
+    // Required - Initializethe Parse SDK
     Parse.initialize(this, getString(R.string.parse_app_id),
         getString(R.string.parse_client_key));
-    // Associate the device with a user
-  /*  ParseInstallation installation = ParseInstallation.getCurrentInstallation();
-    installation.put("user",ParseUser.getCurrentUser());
-    installation.saveInBackground();
-    */ParsePush.subscribeInBackground("", new SaveCallback() {
+    
+    try {
+    ParsePush.subscribeInBackground("", new SaveCallback() {
         @Override
         public void done(ParseException e) {
             if (e == null) {
@@ -66,9 +69,11 @@ public class SampleApplication extends Application {
           }
         }
      });
+    } catch (Exception e){
+    	Log.e("com.parse.Sample Application","Error at parse subscribe background",e);
+    }
     
     Parse.setLogLevel(Parse.LOG_LEVEL_DEBUG);
-
     // Optional - If you don't want to allow Facebook login, you can
     // remove this line (and other related ParseFacebookUtils calls)
     ParseFacebookUtils.initialize(getString(R.string.facebook_app_id));
@@ -86,11 +91,11 @@ public class SampleApplication extends Application {
             MessageDigest md = MessageDigest.getInstance("SHA");
             md.update(signature.toByteArray());
             Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
-            }
+        } 
     } catch (NameNotFoundException e) {
-
+    	Log.e("com.parse.com.SampleApplication.java","Name not found exception",e); 
     } catch (NoSuchAlgorithmException e) {
-
-    }
+    	Log.e("com.parse.com.SampleApplication.java","No such algorithm",e); 
+    } 
   }
 }

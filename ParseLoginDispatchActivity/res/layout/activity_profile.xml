@@ -1,4 +1,11 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<!-- <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+ -->
+
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clickable="true"
@@ -36,7 +43,7 @@
 
     <LinearLayout
         android:layout_width="282dp"
-        android:layout_height="202dp"
+        android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="vertical" >
 
@@ -64,6 +71,16 @@
             style="@style/ParseLoginUI.Button"
             android:layout_marginTop="@dimen/com_parse_ui_large_vertical_spacing"
             android:text="@string/profile_logout_button_label" />
+
+        <Button
+            android:id="@+id/video_button"
+            style="@style/ParseLoginUI.Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/com_parse_ui_large_vertical_spacing"
+            android:text="@string/profile_training_video_button_label" />
+
     </LinearLayout>
 
 </LinearLayout>
+</ScrollView>

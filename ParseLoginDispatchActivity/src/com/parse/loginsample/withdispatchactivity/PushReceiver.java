@@ -30,8 +30,8 @@ public class PushReceiver extends ParsePushBroadcastReceiver {
               System.out.println("..." + key + " => " + json.getString(key));
             }
             
-            String message = json.getString("location");
-            i.putExtra("address", message);
+            String loc = json.getString("location");
+            i.putExtra("location", loc);
             
             String lat = json.getString("latitude");
             i.putExtra("Latitude", lat);

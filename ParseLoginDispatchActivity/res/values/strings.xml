@@ -7,10 +7,13 @@
     <string name="facebook_app_id">590946607698049</string>
     <string name="twitter_consumer_key">2A3a9All9ZJ9gnxqWv4gyBPn6</string>
     <string name="twitter_consumer_secret">EiH27k4ul4ni0UMAh0vIqyIUuOdY7fWdwbmxzGvFGObAVcnsQD</string>
-
+    <string name= "flurry_apikey">88N3VZNN7WSWNHNZX4X7</string>
+    <string name= "google_apikey"> AIzaSyA2yCrevhK9ZRfJBepJ21aD8aRVzqq4a8M</string>
+    
     <string name="app_name">Save Lives</string>
     <string name="profile_logo_content_description">Logo</string>
     <string name="profile_title_logged_in">Your are logged in as</string>
     <string name="profile_logout_button_label">Log out</string>
+    <string name="profile_training_video_button_label">Play Training Video</string>
 
 </resources>

@@ -265,7 +265,7 @@ public class ParseSignupFragment extends ParseLoginFragmentBase implements
       showToast(R.string.com_parse_ui_no_address_toast);
     } else if (phone.length() == 0) {  
         showToast(R.string.com_parse_ui_no_phone_toast);
-    } else if (phone != null && ((phone.length() < 11 || 
+    } /*else if (phone != null && ((phone.length() < 11 || 
                phone.length() > 18) || !matcher1.matches())) {
         showToast(R.string.com_parse_ui_invalid_phone_toast);
     } else if (emergencyCnt.length() == 0) {  
@@ -273,7 +273,7 @@ public class ParseSignupFragment extends ParseLoginFragmentBase implements
     } else if (emergencyCnt != null && (emergencyCnt.length() < 11 ||
                emergencyCnt.length() > 18 || !matcher2.matches())) {
         showToast(R.string.com_parse_ui_invalid_emergency_contact_toast);
-    } else {
+    } */else {
       ParseUser user = new ParseUser();
 
       // Set standard fields
